@@ -2,6 +2,9 @@ name: VanteyKitPvP
 version: '${project.version}'
 main: it.thatskai.vanteykitpvp.VanteyKitPvP
 commands:
+  coinflip:
+    aliases:
+      - cf
   assegno:
     aliases:
       - assegni

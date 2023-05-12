@@ -1,1 +1,6 @@
 no-permissions: "&cNessun permesso!"
+
+
+
+coin-flip-max: 5000
+coin-flip-min: 2000
