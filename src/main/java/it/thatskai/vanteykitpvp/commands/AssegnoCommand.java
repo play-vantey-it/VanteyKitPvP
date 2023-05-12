@@ -1,9 +1,11 @@
 package it.thatskai.vanteykitpvp.commands;
 
+import com.avaje.ebeaninternal.server.core.Message;
 import com.earth2me.essentials.api.Economy;
 import it.thatskai.vanteykitpvp.utils.Format;
 import it.thatskai.vanteykitpvp.utils.Messages;
 import lombok.SneakyThrows;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,8 +27,36 @@ public class AssegnoCommand implements CommandExecutor {
             p.sendMessage("/assegno [quantità]");
         }
 
-        if(args.length == 1){
+        if(args.length >= 1){
             if(args[0].equalsIgnoreCase("give")){
+                if(!p.hasPermission("kitpvp.give")){
+                    p.sendMessage(Format.color(Messages.noperms));
+                    return true;
+                }
+
+                if(args.length == 3){
+                    Player t = Bukkit.getPlayer(args[1]);
+                    String amount = args[2];
+
+                    //Crea l'assegno
+                    ItemStack assegno = new ItemStack(Material.PAPER);
+                    ItemMeta assegno_meta = assegno.getItemMeta();
+                    assegno_meta.setDisplayName(amount + "$");
+                    assegno.setItemMeta(assegno_meta);
+
+                    //Da l'assegno al giocatore
+                    t.getInventory().addItem(assegno);
+
+                    p.sendMessage(Format.color("&aHai dato al giocatore " + t.getName() + " un assegno da &e" + amount));
+
+                    t.sendMessage(Format.color("&aTi è stato consegnato un assegno da &e" + amount));
+
+
+                }else{
+                    p.sendMessage(Format.color("&c/assegno give [player] [quantità]"));
+                }
+
+
 
                 return true;
             }
