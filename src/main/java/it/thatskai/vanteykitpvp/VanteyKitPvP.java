@@ -2,6 +2,7 @@ package it.thatskai.vanteykitpvp;
 
 import it.thatskai.vanteykitpvp.commands.AssegnoCommand;
 import it.thatskai.vanteykitpvp.commands.CoinFlipCommand;
+import it.thatskai.vanteykitpvp.commands.MainCommand;
 import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
 import it.thatskai.vanteykitpvp.listeners.CoinFlipListener;
 import it.thatskai.vanteykitpvp.listeners.WeatherListener;
@@ -44,6 +45,7 @@ public final class VanteyKitPvP extends JavaPlugin {
     public void registerCommands(){
         getCommand("assegno").setExecutor(new AssegnoCommand());
         getCommand("coinflip").setExecutor(new CoinFlipCommand());
+        getCommand("vkitpvp").setExecutor(new MainCommand());
     }
 
     public void registerListener(){

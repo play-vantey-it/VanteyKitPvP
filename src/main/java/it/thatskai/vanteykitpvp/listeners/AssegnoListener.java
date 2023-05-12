@@ -1,6 +1,7 @@
 package it.thatskai.vanteykitpvp.listeners;
 
 import com.earth2me.essentials.api.Economy;
+import it.thatskai.vanteykitpvp.VanteyKitPvP;
 import it.thatskai.vanteykitpvp.utils.Format;
 import lombok.SneakyThrows;
 import org.bukkit.Material;
@@ -35,7 +36,8 @@ public class AssegnoListener implements Listener {
                     p.getInventory().setItemInHand(air);
                 }
 
-                p.sendMessage(Format.color("&aHai riscattato l'assegno da &e" + amount));
+                p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("assegno-riscattato")
+                        .replace("%amount%", String.valueOf(amount))));
 
                 return;
             }

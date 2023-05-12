@@ -13,9 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class CoinFlipManager {
 
@@ -64,7 +62,7 @@ public class CoinFlipManager {
     }
 
     public void openCoinFlipInventory(Player p){
-        Inventory gui = Bukkit.createInventory(null, 54, Format.color("&6CoinFlip"));
+        Inventory gui = Bukkit.createInventory(null, 54, Format.color(VanteyKitPvP.getInstance().getConfig().getString("gui-title")));
 
         for(String players : players_list){
 
@@ -75,12 +73,14 @@ public class CoinFlipManager {
                 ItemStack player = new ItemStack(Material.STAINED_CLAY);
                 ItemMeta pmeta = player.getItemMeta();
                 pmeta.setDisplayName(players);
-                List<String> lore = new ArrayList<>();
+                List<String> lore = VanteyKitPvP.getInstance().getConfig().getStringList("item-lore");
+                List<String> lorefr = new ArrayList<>();
                 int amount = getCoinFlip().getInt("players-list." + players + ".coin");
-                lore.add(Format.color(" "));
-                lore.add(Format.color("&5Puntata: &7" + amount));
-                lore.add("");
-                lore.add(Format.color("&5Clicca per giocare con &7" + players));
+                for(String string : lore){
+                    lorefr.add(string
+                            .replace("%player%", players)
+                            .replace("%amount%", String.valueOf(amount)));
+                }
                 pmeta.setLore(lore);
                 player.setItemMeta(pmeta);
 
@@ -100,26 +100,26 @@ public class CoinFlipManager {
             Player winnerfr = (indiceCasuale == 0) ? winner : loser;
 
             if(winnerfr == winner){
-                loser.sendMessage("Hai perso.");
+                loser.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("coinflip-lose")));
                 if(loser != coinflip){
                     Economy.subtract(loser.getName(), amount);
                 }
             }else {
-                winner.sendMessage("Hai perso.");
+                winner.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("coinflip-lose")));
                 if(winner != coinflip){
                     Economy.subtract(winner.getName(), amount);
                 }
 
             }
 
-            winnerfr.sendMessage("Hai vinto!");
+            winnerfr.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("coinflip-win")));
 
             Economy.add(winnerfr.getName(), amount*2);
 
             terminateFlip(coinflip);
 
         }
-        
+
     }
 
 

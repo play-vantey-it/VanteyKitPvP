@@ -5,6 +5,10 @@ commands:
   coinflip:
     aliases:
       - cf
+  vkitpvp:
+    aliases:
+      - zkitpvp
+      - kitpvpreforged
   assegno:
     aliases:
       - assegni

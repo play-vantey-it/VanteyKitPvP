@@ -28,7 +28,6 @@ public class CoinFlipCommand implements CommandExecutor {
         }
 
         if(args.length >= 1){
-
             if(args[0].equalsIgnoreCase("create")){
                 if(args.length == 2){
                     int amount = Integer.parseInt(args[1]);
@@ -41,24 +40,29 @@ public class CoinFlipCommand implements CommandExecutor {
                     if(amount < min
                             || amount > max){
 
-                        p.sendMessage(Format.color("&cPuoi scommettere solo soldi da &5" + min + " &ca &5" + max));
+                        p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("invalid-money")
+                                .replace("%min%", String.valueOf(min))
+                                .replace("%max%", String.valueOf(max))));
 
                         return true;
                     }
 
                     if(money < amount){
-                        p.sendMessage(Format.color("&cNon hai abbastanza soldi per scommettere!"));
+                        p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("not-enough-money")
+                                .replace("%min%", String.valueOf(min))
+                                .replace("%max%", String.valueOf(max))));
                         return true;
                     }
 
                     if(CoinFlipManager.getCoinFlip().getInt("players-list."+p.getName()+".coin") != 0){
-                        p.sendMessage(Format.color("&cHai già una scommessa aperta! Eliminala con &5/coinflip &cremove per crearne un'altra"));
+                        p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("already-has-a-coinflip")));
                         return true;
                     }
 
                     coinflip.createFlip(p, amount);
 
-                    p.sendMessage(Format.color("&aHai creato con successo una scommessa da &e" + amount));
+                    p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("coinflip-created")
+                            .replace("%amount%", String.valueOf(amount))));
                 }else{
                     p.sendMessage(Format.color("&c/coinflip create [quantità]"));
                 }
@@ -67,12 +71,9 @@ public class CoinFlipCommand implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("remove")){
                 coinflip.removeFlip(p);
-                p.sendMessage(Format.color("&aHai rimosso la scommessa con successo"));
+                p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("coinflip-removed")));
 
             }
-
-
-
         }
         return true;
     }

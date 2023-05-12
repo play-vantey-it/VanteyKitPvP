@@ -2,6 +2,7 @@ package it.thatskai.vanteykitpvp.commands;
 
 import com.avaje.ebeaninternal.server.core.Message;
 import com.earth2me.essentials.api.Economy;
+import it.thatskai.vanteykitpvp.VanteyKitPvP;
 import it.thatskai.vanteykitpvp.utils.Format;
 import it.thatskai.vanteykitpvp.utils.Messages;
 import lombok.SneakyThrows;
@@ -14,6 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
+
 public class AssegnoCommand implements CommandExecutor {
     @SneakyThrows
     @Override
@@ -24,7 +27,11 @@ public class AssegnoCommand implements CommandExecutor {
         }
         Player p = (Player) sender;
         if(args.length == 0){
-            p.sendMessage("/assegno [quantità]");
+            List<String> msgs = VanteyKitPvP.getInstance().getConfig().getStringList("assegno-help");
+
+            for(String message : msgs){
+                p.sendMessage(Format.color(message));
+            }
         }
 
         if(args.length >= 1){
@@ -47,9 +54,13 @@ public class AssegnoCommand implements CommandExecutor {
                     //Da l'assegno al giocatore
                     t.getInventory().addItem(assegno);
 
-                    p.sendMessage(Format.color("&aHai dato al giocatore " + t.getName() + " un assegno da &e" + amount));
+                    p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("assegno-give-sender")
+                            .replace("%amount%", String.valueOf(amount))
+                            .replace("%player%", t.getName())));
 
-                    t.sendMessage(Format.color("&aTi è stato consegnato un assegno da &e" + amount));
+                    t.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("assegno-give-sender")
+                            .replace("%amount%", String.valueOf(amount))
+                            .replace("%player%", p.getName())));
 
 
                 }else{
@@ -61,14 +72,18 @@ public class AssegnoCommand implements CommandExecutor {
                 return true;
             }
             if(args[0].equalsIgnoreCase("help")){
-                p.sendMessage("/assegno [quantità | give | help]");
+                List<String> msgs = VanteyKitPvP.getInstance().getConfig().getStringList("assegno-help");
+
+                for(String message : msgs){
+                    p.sendMessage(Format.color(message));
+                }
                 return true;
             }
 
             int amount = Integer.parseInt(args[0]);
 
             if(amount > Economy.getMoney(p.getName())){
-                p.sendMessage(Format.color("&cNon hai abbastanza soldi per creare questo assegno!"));
+                p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("not-enough-money")));
                 return true;
             }
 
@@ -85,15 +100,9 @@ public class AssegnoCommand implements CommandExecutor {
             //Da l'assegno al giocatore
             p.getInventory().addItem(assegno);
 
-            p.sendMessage(Format.color("&aHai creato correttamente un assegno da &e" + amount));
-
-
+            p.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("assegno-creato")
+                    .replace("%amount%", String.valueOf(amount))));
         }
-
-
-
-
-
         return true;
     }
 }

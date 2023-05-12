@@ -1,6 +1,36 @@
-no-permissions: "&cNessun permesso!"
-
-
-
 coin-flip-max: 5000
 coin-flip-min: 2000
+
+no-permissions: "&cNessun permesso!"
+invalid-money: "&cPuoi scommettere solo soldi da &5%min% &ca &5%max%"
+not-enough-money: "&cNon hai abbastanza soldi!"
+non-puoi-scommettere-da-solo: "&cNon puoi scommettere con te stesso"
+player-not-coinflip: "&cQuesto giocatore non sta giocando"
+already-has-a-coinflip: "&cHai già una scommessa aperta! Eliminala con &5/coinflip remove &cper crearne un'altra"
+
+coinflip-created: "&aHai creato con successo una scommessa da &e%amount%"
+coinflip-removed: "&aHai rimosso la scommessa con successo"
+
+coinflip-win: "&aHai vinto la scommessa!"
+coinflip-lose: "&cHai perso la scommessa!"
+
+#GUI
+gui-title: "&6CoinFlip"
+item-lore:
+  - ""
+  - "&5Puntata: &7%amount%"
+  - "&6"
+  - "&5Clicca per giocare con &7%player%"
+
+
+#Assegni
+assegno-riscattato: "&aHai riscattato l'assegno da &e%amount%$"
+assegno-creato: "&aHai creato correttamente un assegno da &e%amount%$"
+assegno-give-sender: "&aHai dato al giocatore &5%player% &aun assegno da &e%amount%$"
+assegno-give-receiver: "&aTi è stato consegnato un assegno da &e%amount%$"
+assegno-help:
+  - "&7Lista comandi di /assegno:"
+  - "&7"
+  - "&f/assegno [quantità] &7- Crea un assegno"
+  - "&f/assegno give [player] [quantità] &7- Da a un giocatore un assegno, UTILIZZABILE SOLO DAGLI ADMIN"
+  - "&f/assegno help &7- Manda questo messaggio"
