@@ -31,7 +31,7 @@ public final class VanteyKitPvP extends JavaPlugin {
 
         saveDefaultConfig();
         createCoinFlipConfig();
-        //saveCoinFlipConfig();
+        saveCoinFlipConfig();
         registerCommands();
         registerListener();
 
