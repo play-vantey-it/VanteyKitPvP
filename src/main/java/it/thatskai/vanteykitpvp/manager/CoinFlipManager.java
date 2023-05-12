@@ -17,13 +17,14 @@ import java.util.List;
 
 public class CoinFlipManager {
 
-    public List<String> players_list = getCoinFlip().getStringList("players-list");
+    public static List<String> players_list = new ArrayList<>();
 
     @SneakyThrows
     public void createFlip(Player p, int amount){
         String name = p.getName();
 
         players_list.add(name);
+        getCoinFlip().set("players-list", players_list);
         getCoinFlip().set("players-list."+name+".coin", amount);
         saveCoinFlip();
 
@@ -36,9 +37,9 @@ public class CoinFlipManager {
         String name = p.getName();
 
         players_list.remove(name);
+        getCoinFlip().set("players-list", players_list);
         Economy.add(name,getCoinFlip().getInt("players-list."+name+".coin") );
         getCoinFlip().set("players-list."+name+".coin", null);
-        getCoinFlip().set("players-list", players_list);
         saveCoinFlip();
 
 
@@ -49,8 +50,8 @@ public class CoinFlipManager {
         String name = p.getName();
 
         players_list.remove(name);
-        getCoinFlip().set("players-list."+name+".coin", null);
         getCoinFlip().set("players-list", players_list);
+        getCoinFlip().set("players-list."+name+".coin", null);
         saveCoinFlip();
 
 
@@ -66,10 +67,7 @@ public class CoinFlipManager {
 
         for(String players : players_list){
 
-            if(getCoinFlip().getInt("players-list."+players+".coin") == 0){
-
-            }else {
-
+            if(getCoinFlip().getInt("players-list."+players+".coin") != 0){
                 ItemStack player = new ItemStack(Material.STAINED_CLAY);
                 ItemMeta pmeta = player.getItemMeta();
                 pmeta.setDisplayName(players);
@@ -86,6 +84,7 @@ public class CoinFlipManager {
 
                 gui.addItem(player);
             }
+
         }
         p.openInventory(gui);
     }

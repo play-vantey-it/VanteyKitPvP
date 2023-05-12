@@ -31,15 +31,12 @@ public final class VanteyKitPvP extends JavaPlugin {
 
         saveDefaultConfig();
         createCoinFlipConfig();
-        saveCoinFlipConfig();
+        //saveCoinFlipConfig();
         registerCommands();
         registerListener();
 
-    }
+        CoinFlipManager.players_list.addAll(coinflip.getConfigurationSection("players-list").getKeys(false));
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 
     public void registerCommands(){

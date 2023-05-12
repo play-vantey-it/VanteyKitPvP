@@ -6,7 +6,7 @@ invalid-money: "&cPuoi scommettere solo soldi da &5%min% &ca &5%max%"
 not-enough-money: "&cNon hai abbastanza soldi!"
 non-puoi-scommettere-da-solo: "&cNon puoi scommettere con te stesso"
 player-not-coinflip: "&cQuesto giocatore non sta giocando"
-already-has-a-coinflip: "&cHai già una scommessa aperta! Eliminala con &5/coinflip remove &cper crearne un'altra"
+already-has-a-coinflip: "&cHai gia una scommessa aperta! Eliminala con &5/coinflip remove &cper crearne un'altra"
 
 coinflip-created: "&aHai creato con successo una scommessa da &e%amount%"
 coinflip-removed: "&aHai rimosso la scommessa con successo"
@@ -27,7 +27,7 @@ item-lore:
 assegno-riscattato: "&aHai riscattato l'assegno da &e%amount%$"
 assegno-creato: "&aHai creato correttamente un assegno da &e%amount%$"
 assegno-give-sender: "&aHai dato al giocatore &5%player% &aun assegno da &e%amount%$"
-assegno-give-receiver: "&aTi è stato consegnato un assegno da &e%amount%$"
+assegno-give-receiver: "&aTi e stato consegnato un assegno da &e%amount%$"
 assegno-help:
   - "&7Lista comandi di /assegno:"
   - "&7"
