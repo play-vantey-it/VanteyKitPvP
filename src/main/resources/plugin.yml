@@ -1,4 +1,4 @@
-name: VanteyKitPvP
+name: vKitPvP
 version: '${project.version}'
 main: it.thatskai.vanteykitpvp.VanteyKitPvP
 commands:

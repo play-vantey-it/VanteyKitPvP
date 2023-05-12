@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CoinFlipManager {
 
-    private final List<String> players_list = getCoinFlip().getStringList("players-list");
+    public List<String> players_list = getCoinFlip().getStringList("players-list");
 
     @SneakyThrows
     public void createFlip(Player p, int amount){
@@ -39,9 +39,28 @@ public class CoinFlipManager {
         players_list.remove(name);
         Economy.add(name,getCoinFlip().getInt("players-list."+name+".coin") );
         getCoinFlip().set("players-list."+name+".coin", null);
+        getCoinFlip().set("players-list", players_list);
         saveCoinFlip();
 
 
+    }
+
+    @SneakyThrows
+    public void terminateFlip(Player p){
+        String name = p.getName();
+
+        players_list.remove(name);
+        //Economy.add(name,getCoinFlip().getInt("players-list."+name+".coin") );
+        getCoinFlip().set("players-list."+name+".coin", null);
+        getCoinFlip().set("players-list", players_list);
+        saveCoinFlip();
+
+
+    }
+
+    public int getAmount(Player scommessionista){
+        String name = scommessionista.getName();
+        return getCoinFlip().getInt("players-list."+name+".coin");
     }
 
     public void openCoinFlipInventory(Player p){
@@ -49,36 +68,34 @@ public class CoinFlipManager {
 
         for(String players : players_list){
 
-            ItemStack player = new ItemStack(Material.STAINED_CLAY);
-            ItemMeta pmeta = player.getItemMeta();
-            pmeta.setDisplayName(players);
-            List<String> lore = new ArrayList<>();
-            int amount = getCoinFlip().getInt("players-list."+players+".coin");
-            lore.add(Format.color(" "));
-            lore.add(Format.color("&5Puntata: &7" + amount));
-            lore.add("");
-            lore.add(Format.color("&5Clicca per giocare con &7" + players));
-            pmeta.setLore(lore);
-            player.setItemMeta(pmeta);
+            if(getCoinFlip().getInt("players-list."+players+".coin") == 0){
 
-            gui.addItem(player);
+            }else {
+
+                ItemStack player = new ItemStack(Material.STAINED_CLAY);
+                ItemMeta pmeta = player.getItemMeta();
+                pmeta.setDisplayName(players);
+                List<String> lore = new ArrayList<>();
+                int amount = getCoinFlip().getInt("players-list." + players + ".coin");
+                lore.add(Format.color(" "));
+                lore.add(Format.color("&5Puntata: &7" + amount));
+                lore.add("");
+                lore.add(Format.color("&5Clicca per giocare con &7" + players));
+                pmeta.setLore(lore);
+                player.setItemMeta(pmeta);
+
+                gui.addItem(player);
+            }
         }
-
-
-
-
-
-
         p.openInventory(gui);
     }
 
 
 
-
-
-    public FileConfiguration getCoinFlip(){
+    public static FileConfiguration getCoinFlip(){
         return VanteyKitPvP.coinflip;
     }
+
 
     public void saveCoinFlip(){
         VanteyKitPvP.saveCoinFlipConfig();

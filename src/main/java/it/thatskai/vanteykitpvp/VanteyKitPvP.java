@@ -3,7 +3,9 @@ package it.thatskai.vanteykitpvp;
 import it.thatskai.vanteykitpvp.commands.AssegnoCommand;
 import it.thatskai.vanteykitpvp.commands.CoinFlipCommand;
 import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
+import it.thatskai.vanteykitpvp.listeners.CoinFlipListener;
 import it.thatskai.vanteykitpvp.listeners.WeatherListener;
+import it.thatskai.vanteykitpvp.manager.CoinFlipManager;
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -49,6 +51,7 @@ public final class VanteyKitPvP extends JavaPlugin {
 
         pm.registerEvents(new WeatherListener(), this);
         pm.registerEvents(new AssegnoListener(), this);
+        pm.registerEvents(new CoinFlipListener(), this);
     }
 
     public static void createCoinFlipConfig() {
@@ -71,11 +74,10 @@ public final class VanteyKitPvP extends JavaPlugin {
 
     public static void saveCoinFlipConfig() {
         try {
+            //coinflip.set("players-list", CoinFlipManager.players_list);
             coinflip.save(configFile);
         } catch (IOException var1) {
             var1.printStackTrace();
         }
-
-
     }
 }
