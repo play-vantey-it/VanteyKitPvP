@@ -77,11 +77,11 @@ public class CoinFlipManager {
                 List<String> lorefr = new ArrayList<>();
                 int amount = getCoinFlip().getInt("players-list." + players + ".coin");
                 for(String string : lore){
-                    lorefr.add(string
+                    lorefr.add(Format.color(string
                             .replace("%player%", players)
-                            .replace("%amount%", String.valueOf(amount)));
+                            .replace("%amount%", String.valueOf(amount))));
                 }
-                pmeta.setLore(lore);
+                pmeta.setLore(lorefr);
                 player.setItemMeta(pmeta);
 
                 gui.addItem(player);
