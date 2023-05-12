@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 
+import java.util.Random;
+
 public class CoinFlipListener implements Listener {
 
     private final CoinFlipManager coinflip = new CoinFlipManager();
@@ -40,20 +42,18 @@ public class CoinFlipListener implements Listener {
                 p.sendMessage(Format.color("&cNon puoi scommettere da solo!"));
                 return;
             }
+            if(CoinFlipManager.getCoinFlip().getInt("players-list."+player_name+".coin") == 0){
+                p.sendMessage(Format.color("&cQuesto giocatore non sta giocando"));
+                p.closeInventory();
+                coinflip.openCoinFlipInventory(p);
+                return;
+            }
 
             p.closeInventory();
 
             // TODO: fare quel fottutissimo sistema del 50% intanto testo senza! :D
 
-            p2.sendMessage("Hai vinto!");
-
-            p.sendMessage("Hai perso!");
-
-            Economy.add(p2.getName(), amount*2);
-
-            Economy.subtract(p.getName(), amount);
-
-            coinflip.terminateFlip(p2);
+            coinflip.selectPlayer(p, p2, p2);
 
 
         }

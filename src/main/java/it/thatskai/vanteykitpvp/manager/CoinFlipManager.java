@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class CoinFlipManager {
 
@@ -50,7 +51,6 @@ public class CoinFlipManager {
         String name = p.getName();
 
         players_list.remove(name);
-        //Economy.add(name,getCoinFlip().getInt("players-list."+name+".coin") );
         getCoinFlip().set("players-list."+name+".coin", null);
         getCoinFlip().set("players-list", players_list);
         saveCoinFlip();
@@ -90,6 +90,37 @@ public class CoinFlipManager {
         p.openInventory(gui);
     }
 
+    @SneakyThrows
+    public void selectPlayer(Player winner, Player loser, Player coinflip) {
+
+
+        if (winner != null && loser != null) {
+            int indiceCasuale = (int) (Math.random() * 2);
+            int amount = getAmount(coinflip);
+            Player winnerfr = (indiceCasuale == 0) ? winner : loser;
+
+            if(winnerfr == winner){
+                loser.sendMessage("Hai perso.");
+                if(loser != coinflip){
+                    Economy.subtract(loser.getName(), amount);
+                }
+            }else {
+                winner.sendMessage("Hai perso.");
+                if(winner != coinflip){
+                    Economy.subtract(winner.getName(), amount);
+                }
+
+            }
+
+            winnerfr.sendMessage("Hai vinto!");
+
+            Economy.add(winnerfr.getName(), amount*2);
+
+            terminateFlip(coinflip);
+
+        }
+        
+    }
 
 
     public static FileConfiguration getCoinFlip(){

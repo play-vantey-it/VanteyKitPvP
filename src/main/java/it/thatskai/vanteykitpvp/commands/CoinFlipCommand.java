@@ -51,14 +51,14 @@ public class CoinFlipCommand implements CommandExecutor {
                         return true;
                     }
 
-                    if(coinflip.players_list.contains(p.getName())){
+                    if(CoinFlipManager.getCoinFlip().getInt("players-list."+p.getName()+".coin") != 0){
                         p.sendMessage(Format.color("&cHai già una scommessa aperta! Eliminala con &5/coinflip &cremove per crearne un'altra"));
                         return true;
                     }
 
                     coinflip.createFlip(p, amount);
 
-                    p.sendMessage(Format.color("&aHai creato con successo una scommessa da " + amount));
+                    p.sendMessage(Format.color("&aHai creato con successo una scommessa da &e" + amount));
                 }else{
                     p.sendMessage(Format.color("&c/coinflip create [quantità]"));
                 }
