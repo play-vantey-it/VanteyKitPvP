@@ -20,15 +20,19 @@ public class AssegnoListener implements Listener {
         Material mat = e.getMaterial();
         ItemStack i = e.getPlayer().getItemInHand();
         if(a.equals(Action.RIGHT_CLICK_BLOCK) || a.equals(Action.RIGHT_CLICK_AIR)){
-            if(mat.equals(Material.PAPER)){
-                int amount = Integer.parseInt(i.getItemMeta().getDisplayName());
+            if(mat.equals(Material.PAPER) && i.getItemMeta().getDisplayName().endsWith("$")){
+                String name = e.getPlayer().getItemInHand().getItemMeta().getDisplayName();
+                String name_without_$ = name.replaceAll("[^\\d]", "");
+                int amount = Integer.parseInt(name_without_$);
 
                 Economy.add(p.getName(), amount);
 
                 if(i.getAmount() > 1){
                     i.setAmount(i.getAmount()-1);
                 }else{
-                    i.setType(Material.AIR);
+                    ItemStack air = new ItemStack(Material.AIR);
+
+                    p.getInventory().setItemInHand(air);
                 }
 
                 p.sendMessage(Format.color("&aHai riscattato l'assegno da &e" + amount));

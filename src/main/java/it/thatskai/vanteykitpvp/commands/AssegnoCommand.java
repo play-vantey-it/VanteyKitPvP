@@ -42,19 +42,20 @@ public class AssegnoCommand implements CommandExecutor {
                 return true;
             }
 
-
+            //Toglie soldi al giocatore
             Economy.subtract(p.getName(), amount);
 
+
+            //Crea l'assegno
             ItemStack assegno = new ItemStack(Material.PAPER);
             ItemMeta assegno_meta = assegno.getItemMeta();
-            assegno_meta.setDisplayName(String.valueOf(amount));
+            assegno_meta.setDisplayName(String.valueOf(amount) + "$");
             assegno.setItemMeta(assegno_meta);
 
+            //Da l'assegno al giocatore
             p.getInventory().addItem(assegno);
 
-
-
-            p.sendMessage("Hai creato correttamente un assegno da &e" + amount);
+            p.sendMessage(Format.color("&aHai creato correttamente un assegno da &e" + amount));
 
 
         }

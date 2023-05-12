@@ -3,3 +3,5 @@ version: '${project.version}'
 main: it.thatskai.vanteykitpvp.VanteyKitPvP
 commands:
   assegno:
+    aliases:
+      - assegni
