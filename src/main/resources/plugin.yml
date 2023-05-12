@@ -1,3 +1,5 @@
 name: VanteyKitPvP
 version: '${project.version}'
 main: it.thatskai.vanteykitpvp.VanteyKitPvP
+commands:
+  assegno:

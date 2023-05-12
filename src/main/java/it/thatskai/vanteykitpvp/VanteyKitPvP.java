@@ -1,5 +1,7 @@
 package it.thatskai.vanteykitpvp;
 
+import it.thatskai.vanteykitpvp.commands.AssegnoCommand;
+import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
 import it.thatskai.vanteykitpvp.listeners.WeatherListener;
 import lombok.Getter;
 import org.bukkit.plugin.PluginManager;
@@ -15,6 +17,8 @@ public final class VanteyKitPvP extends JavaPlugin {
         instance = this;
 
         saveDefaultConfig();
+        registerCommands();
+        registerListener();
 
     }
 
@@ -23,10 +27,15 @@ public final class VanteyKitPvP extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    public void registerCommands(){
+        getCommand("assegno").setExecutor(new AssegnoCommand());
+    }
+
     public void registerListener(){
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new WeatherListener(), this);
+        pm.registerEvents(new AssegnoListener(), this);
 
 
     }
