@@ -7,12 +7,14 @@ import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
 import it.thatskai.vanteykitpvp.listeners.CoinFlipListener;
 import it.thatskai.vanteykitpvp.listeners.WeatherListener;
 import it.thatskai.vanteykitpvp.manager.CoinFlipManager;
+import it.thatskai.vanteykitpvp.tasks.KeepDayTask;
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +38,8 @@ public final class VanteyKitPvP extends JavaPlugin {
         registerListener();
 
         CoinFlipManager.players_list.addAll(coinflip.getConfigurationSection("players-list").getKeys(false));
+
+        BukkitTask daytask = new KeepDayTask().runTaskTimer(this, 0L, 0L);
 
     }
 

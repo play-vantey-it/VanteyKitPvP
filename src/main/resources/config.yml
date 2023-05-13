@@ -8,6 +8,8 @@ non-puoi-scommettere-da-solo: "&cNon puoi scommettere con te stesso"
 player-not-coinflip: "&cQuesto giocatore non sta giocando"
 already-has-a-coinflip: "&cHai gia una scommessa aperta! Eliminala con &5/coinflip remove &cper crearne un'altra"
 
+world: "world"
+
 coinflip-created: "&aHai creato con successo una scommessa da &e%amount%"
 coinflip-removed: "&aHai rimosso la scommessa con successo"
 
