@@ -7,8 +7,8 @@ commands:
       - cf
   vkitpvp:
     aliases:
-      - zkitpvp
       - kitpvpreforged
+  envoy:
   assegno:
     aliases:
       - assegni

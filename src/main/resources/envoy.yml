@@ -1,0 +1,9 @@
+chest-items:
+  GOLDEN_APPLE:
+    amount: 3
+  ARROW:
+    amount: 10
+  DIAMOND_SWORD:
+    amount: 1
+  DIAMOND_PICKAXE:
+    amount: 1

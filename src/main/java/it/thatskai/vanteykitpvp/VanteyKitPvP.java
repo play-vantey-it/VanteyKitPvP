@@ -2,6 +2,7 @@ package it.thatskai.vanteykitpvp;
 
 import it.thatskai.vanteykitpvp.commands.AssegnoCommand;
 import it.thatskai.vanteykitpvp.commands.CoinFlipCommand;
+import it.thatskai.vanteykitpvp.commands.EnvoyCommand;
 import it.thatskai.vanteykitpvp.commands.MainCommand;
 import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
 import it.thatskai.vanteykitpvp.listeners.CoinFlipListener;
@@ -25,6 +26,7 @@ public final class VanteyKitPvP extends JavaPlugin {
     private static VanteyKitPvP instance;
     public static File configFile;
     public static FileConfiguration coinflip;
+    public static FileConfiguration envoy;
 
 
     @Override
@@ -47,6 +49,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         getCommand("assegno").setExecutor(new AssegnoCommand());
         getCommand("coinflip").setExecutor(new CoinFlipCommand());
         getCommand("vkitpvp").setExecutor(new MainCommand());
+        getCommand("envoy").setExecutor(new EnvoyCommand());
     }
 
     public void registerListener(){
@@ -72,13 +75,32 @@ public final class VanteyKitPvP extends JavaPlugin {
             var1.printStackTrace();
         }
 
+        configFile = new File(instance.getDataFolder(), "envoy.yml");
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+            instance.saveResource("envoy.yml", false);
+        }
+
+        envoy = new YamlConfiguration();
+
+        try {
+            envoy.load(configFile);
+        } catch (InvalidConfigurationException | IOException var1) {
+            var1.printStackTrace();
+        }
+
 
     }
 
     public static void saveCoinFlipConfig() {
         try {
-            //coinflip.set("players-list", CoinFlipManager.players_list);
             coinflip.save(configFile);
+        } catch (IOException var1) {
+            var1.printStackTrace();
+        }
+
+        try {
+            envoy.save(configFile);
         } catch (IOException var1) {
             var1.printStackTrace();
         }
