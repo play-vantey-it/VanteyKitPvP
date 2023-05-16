@@ -1,13 +1,12 @@
 package it.thatskai.vanteykitpvp;
 
-import it.thatskai.vanteykitpvp.commands.AssegnoCommand;
-import it.thatskai.vanteykitpvp.commands.CoinFlipCommand;
-import it.thatskai.vanteykitpvp.commands.EnvoyCommand;
-import it.thatskai.vanteykitpvp.commands.MainCommand;
+import it.thatskai.vanteykitpvp.commands.*;
 import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
 import it.thatskai.vanteykitpvp.listeners.CoinFlipListener;
+import it.thatskai.vanteykitpvp.listeners.KothListener;
 import it.thatskai.vanteykitpvp.listeners.WeatherListener;
 import it.thatskai.vanteykitpvp.manager.CoinFlipManager;
+import it.thatskai.vanteykitpvp.manager.KothManager;
 import it.thatskai.vanteykitpvp.tasks.KeepDayTask;
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -26,6 +25,7 @@ public final class VanteyKitPvP extends JavaPlugin {
     private static VanteyKitPvP instance;
     public static File configFile;
     public static FileConfiguration coinflip;
+    public static FileConfiguration koth;
     public static FileConfiguration envoy;
 
 
@@ -45,11 +45,18 @@ public final class VanteyKitPvP extends JavaPlugin {
 
     }
 
+    @Override
+    public void onDisable() {
+        KothManager koth = new KothManager();
+        koth.inGame(false);
+    }
+
     public void registerCommands(){
         getCommand("assegno").setExecutor(new AssegnoCommand());
         getCommand("coinflip").setExecutor(new CoinFlipCommand());
         getCommand("vkitpvp").setExecutor(new MainCommand());
-        getCommand("envoy").setExecutor(new EnvoyCommand());
+        //getCommand("envoy").setExecutor(new EnvoyCommand());
+        getCommand("koth").setExecutor(new KothCommand());
     }
 
     public void registerListener(){
@@ -58,6 +65,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         pm.registerEvents(new WeatherListener(), this);
         pm.registerEvents(new AssegnoListener(), this);
         pm.registerEvents(new CoinFlipListener(), this);
+        pm.registerEvents(new KothListener(), this);
     }
 
     public static void createCoinFlipConfig() {
@@ -89,6 +97,20 @@ public final class VanteyKitPvP extends JavaPlugin {
             var1.printStackTrace();
         }
 
+        configFile = new File(instance.getDataFolder(), "koth.yml");
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+            instance.saveResource("koth.yml", false);
+        }
+
+        koth = new YamlConfiguration();
+
+        try {
+            koth.load(configFile);
+        } catch (InvalidConfigurationException | IOException var1) {
+            var1.printStackTrace();
+        }
+
 
     }
 
@@ -103,6 +125,12 @@ public final class VanteyKitPvP extends JavaPlugin {
             envoy.save(configFile);
         } catch (IOException var1) {
             var1.printStackTrace();
+        }
+
+        try {
+            koth.save(configFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

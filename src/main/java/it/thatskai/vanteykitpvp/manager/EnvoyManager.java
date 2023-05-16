@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EnvoyManager {
     private static List<Material> materials = new ArrayList<>();
-    public void startEnvoy(Location centerLocation) {
+    /*public void startEnvoy(Location centerLocation) {
         for (int i = 0; i < 10; i++) {
             Location randomLocation = getRandomLocation(centerLocation, 50);
             Block block = randomLocation.getBlock();
@@ -50,6 +50,6 @@ public class EnvoyManager {
 
         Location randomLocation = centerLocation.clone().add(offsetX, offsetY, offsetZ);
         return randomLocation;
-    }
+    }*/
 
 }

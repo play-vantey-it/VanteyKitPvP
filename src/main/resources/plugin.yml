@@ -8,7 +8,7 @@ commands:
   vkitpvp:
     aliases:
       - kitpvpreforged
-  envoy:
+  koth:
   assegno:
     aliases:
       - assegni

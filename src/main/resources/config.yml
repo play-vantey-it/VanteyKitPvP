@@ -33,6 +33,14 @@ assegno-give-receiver: "&aTi e stato consegnato un assegno da &e%amount%$"
 assegno-help:
   - "&7Lista comandi di /assegno:"
   - "&7"
-  - "&f/assegno [quantità] &7- Crea un assegno"
-  - "&f/assegno give [player] [quantità] &7- Da a un giocatore un assegno, UTILIZZABILE SOLO DAGLI ADMIN"
+  - "&f/assegno [quantita] &7- Crea un assegno"
+  - "&f/assegno give [player] [quantita] &7- Da a un giocatore un assegno, UTILIZZABILE SOLO DAGLI ADMIN"
   - "&f/assegno help &7- Manda questo messaggio"
+
+#koth
+koth-time: 1200 #tempo in tick | 1200 tick = 1 minuto
+koth-start: "&eL'evento KOTH e iniziato!"
+koth-stop: "&eL'evento KOTH e finito!"
+start-controlling: "&5%player% &fha iniziato a controllare il Vantey"
+stop-controlling: "&5%player% &fha smesso di controllare il Vantey"
+capture: "&5%player% &fha catturato il vantey!"
