@@ -44,3 +44,13 @@ koth-stop: "&eL'evento KOTH e finito!"
 start-controlling: "&5%player% &fha iniziato a controllare il Vantey"
 stop-controlling: "&5%player% &fha smesso di controllare il Vantey"
 capture: "&5%player% &fha catturato il vantey!"
+
+scoreboard:
+  koth:
+    title: "&c&lKOTH"
+    lines:
+      - ""
+      - "&fTempo: &e%time%"
+      - "&fGiocatore: &e%player_capturing%"
+      - "&7"
+      - "&2  play.vantey.it"
