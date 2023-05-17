@@ -13,19 +13,21 @@ public class KothManager {
 
     public ArrayList<Player> controlling = new ArrayList<>();
 
+    private DefaultScoreboardManager score = new DefaultScoreboardManager();
     public void startKoth(){
         for(Player all : Bukkit.getOnlinePlayers()){
             all.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("koth-start")));
         }
         inGame(true);
-        setScoreboard();
+        setKothScoreboard();
 
         Bukkit.getServer().getScheduler().runTaskTimer(VanteyKitPvP.getInstance(), () -> {
 
             if (getState()) {
-                setScoreboard();
+                setKothScoreboard();
             } else {
                 cancelTask();
+                score.updateScoreboard();
             }
         }, 0, 1);
     }
@@ -60,7 +62,7 @@ public class KothManager {
         }
         controlling.clear();
         inGame(false);
-        removeScoreboard();
+        removeKothScoreboard();
     }
 
     public void forceStopKoth(){
@@ -74,7 +76,7 @@ public class KothManager {
         }
         KothListener.secondsRemaining = time();
         KothListener.currentPlayer = null;
-        removeScoreboard();
+        removeKothScoreboard();
     }
 
 
@@ -82,7 +84,7 @@ public class KothManager {
         return VanteyKitPvP.getInstance().getConfig().getInt("koth-time");
     }
 
-    public static void setScoreboard(){
+    public static void setKothScoreboard(){
 
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 
@@ -121,7 +123,7 @@ public class KothManager {
         }
     }
 
-    public void removeScoreboard(){
+    public void removeKothScoreboard(){
         for(Player all : Bukkit.getOnlinePlayers()){
             Scoreboard scoreboard = all.getScoreboard();
             scoreboard.clearSlot(DisplaySlot.SIDEBAR);
@@ -131,7 +133,6 @@ public class KothManager {
     }
 
     public void cancelTask() {
-        // Ferma il blocco di codice
         Bukkit.getServer().getScheduler().cancelTasks(VanteyKitPvP.getInstance());
     }
 

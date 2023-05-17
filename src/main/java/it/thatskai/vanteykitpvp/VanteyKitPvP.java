@@ -1,11 +1,9 @@
 package it.thatskai.vanteykitpvp;
 
 import it.thatskai.vanteykitpvp.commands.*;
-import it.thatskai.vanteykitpvp.listeners.AssegnoListener;
-import it.thatskai.vanteykitpvp.listeners.CoinFlipListener;
-import it.thatskai.vanteykitpvp.listeners.KothListener;
-import it.thatskai.vanteykitpvp.listeners.WeatherListener;
+import it.thatskai.vanteykitpvp.listeners.*;
 import it.thatskai.vanteykitpvp.manager.CoinFlipManager;
+import it.thatskai.vanteykitpvp.manager.DefaultScoreboardManager;
 import it.thatskai.vanteykitpvp.manager.KothManager;
 import it.thatskai.vanteykitpvp.tasks.KeepDayTask;
 import lombok.Getter;
@@ -50,8 +48,8 @@ public final class VanteyKitPvP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        KothManager koth = new KothManager();
-        koth.inGame(false);
+        //KothManager koth = new KothManager();
+        //koth.inGame(false);
     }
 
     public void registerCommands(){
@@ -69,6 +67,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         pm.registerEvents(new AssegnoListener(), this);
         pm.registerEvents(new CoinFlipListener(), this);
         pm.registerEvents(new KothListener(), this);
+        pm.registerEvents(new JoinListener(), this);
     }
 
     public static void createCoinFlipConfig() {

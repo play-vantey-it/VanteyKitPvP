@@ -1,6 +1,5 @@
 package it.thatskai.vanteykitpvp.commands;
 
-import com.avaje.ebeaninternal.server.core.Message;
 import com.earth2me.essentials.api.Economy;
 import it.thatskai.vanteykitpvp.VanteyKitPvP;
 import it.thatskai.vanteykitpvp.utils.Format;

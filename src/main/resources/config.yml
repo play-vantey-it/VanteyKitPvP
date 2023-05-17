@@ -43,9 +43,23 @@ koth-start: "&eL'evento KOTH e iniziato!"
 koth-stop: "&eL'evento KOTH e finito!"
 start-controlling: "&5%player% &fha iniziato a controllare il Vantey"
 stop-controlling: "&5%player% &fha smesso di controllare il Vantey"
-capture: "&5%player% &fha catturato il vantey!"
+capture: "&5%player% &fha catturato il Vantey!"
 
 scoreboard:
+  default:
+    title: "&a&lKITPVP"
+    lines:
+      - ""
+      - "&fUccisioni: &e%kitpvp_kills%"
+      - "&fMorti: &e%kitpvp_deaths%"
+      - "&fStreak: &e%kitpvp_streak%"
+      - "&7"
+      - "&fSoldi: &b%balance%"
+      - "%condition:snowball%"
+      - "%condition:creeper%"
+      - "%condition:rod%"
+      - "&8"
+      - "&a  play.vantey.it"
   koth:
     title: "&c&lKOTH"
     lines:
