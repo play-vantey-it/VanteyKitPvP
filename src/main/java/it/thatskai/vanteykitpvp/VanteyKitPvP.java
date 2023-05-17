@@ -39,7 +39,10 @@ public final class VanteyKitPvP extends JavaPlugin {
         registerCommands();
         registerListener();
 
-        CoinFlipManager.players_list.addAll(coinflip.getConfigurationSection("players-list").getKeys(false));
+        if(coinflip.getConfigurationSection("player-list") != null){
+            CoinFlipManager.players_list.addAll(coinflip.getConfigurationSection("players-list").getKeys(false));
+        }
+
 
         BukkitTask daytask = new KeepDayTask().runTaskTimer(this, 0L, 0L);
 

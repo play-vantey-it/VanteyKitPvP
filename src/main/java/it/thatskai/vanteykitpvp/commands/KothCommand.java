@@ -33,7 +33,7 @@ public class KothCommand implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("stop")){
                 p.sendMessage(Format.color("&cHai stoppato l'evento KOTH"));
-                koth.stopKoth();
+                koth.forceStopKoth();
             }
 
         }
