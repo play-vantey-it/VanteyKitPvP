@@ -5,3 +5,5 @@ target/classes/config.yml
 target/classes/plugin.yml
 VanteyKitPvP.iml
 target/classes/coinflip.yml
+target/classes/envoy.yml
+target/classes/koth.yml
