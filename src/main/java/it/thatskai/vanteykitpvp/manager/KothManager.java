@@ -13,23 +13,12 @@ public class KothManager {
 
     public ArrayList<Player> controlling = new ArrayList<>();
 
-    private DefaultScoreboardManager score = new DefaultScoreboardManager();
     public void startKoth(){
         for(Player all : Bukkit.getOnlinePlayers()){
             all.sendMessage(Format.color(VanteyKitPvP.getInstance().getConfig().getString("koth-start")));
         }
         inGame(true);
-        setKothScoreboard();
-
-        Bukkit.getServer().getScheduler().runTaskTimer(VanteyKitPvP.getInstance(), () -> {
-
-            if (getState()) {
-                setKothScoreboard();
-            } else {
-                cancelTask();
-                score.updateScoreboard();
-            }
-        }, 0, 1);
+        KothListener.secondsRemaining = time();
     }
 
     public void inGame(boolean ingame){
@@ -62,7 +51,6 @@ public class KothManager {
         }
         controlling.clear();
         inGame(false);
-        removeKothScoreboard();
     }
 
     public void forceStopKoth(){
@@ -76,7 +64,6 @@ public class KothManager {
         }
         KothListener.secondsRemaining = time();
         KothListener.currentPlayer = null;
-        removeKothScoreboard();
     }
 
 
@@ -84,53 +71,6 @@ public class KothManager {
         return VanteyKitPvP.getInstance().getConfig().getInt("koth-time");
     }
 
-    public static void setKothScoreboard(){
-
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-
-        Objective obj = scoreboard.registerNewObjective(VanteyKitPvP.getInstance().getConfig().getString("scoreboard.koth.title"), "koth");
-
-        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        obj.setDisplayName(Format.color(VanteyKitPvP.getInstance().getConfig().getString("scoreboard.koth.title")));
-
-        String player;
-
-        if(KothListener.currentPlayer != null){
-            player = KothListener.currentPlayer.getName();
-        }else{
-            player = "Nessuno";
-        }
-
-
-        int _score = VanteyKitPvP.getInstance().getConfig().getStringList("scoreboard.koth").size();
-
-        for(String path : VanteyKitPvP.getInstance().getConfig().getStringList("scoreboard.koth.lines")){
-
-            Score score = obj.getScore(Format.color(path
-                    .replace("%time%", String.valueOf(KothListener.secondsRemaining))
-                    .replace("%player_capturing%", player)
-            ));
-
-            score.setScore(_score +1);
-            _score--;
-
-        }
-
-
-
-        for(Player all : Bukkit.getOnlinePlayers()){
-            all.setScoreboard(scoreboard);
-        }
-    }
-
-    public void removeKothScoreboard(){
-        for(Player all : Bukkit.getOnlinePlayers()){
-            Scoreboard scoreboard = all.getScoreboard();
-            scoreboard.clearSlot(DisplaySlot.SIDEBAR);
-
-            all.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-        }
-    }
 
     public void cancelTask() {
         Bukkit.getServer().getScheduler().cancelTasks(VanteyKitPvP.getInstance());

@@ -1,6 +1,8 @@
 name: vKitPvP
 version: '${project.version}'
 main: it.thatskai.vanteykitpvp.VanteyKitPvP
+depend:
+  - PlaceholderAPI
 commands:
   coinflip:
     aliases:

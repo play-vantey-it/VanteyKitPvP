@@ -12,6 +12,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AssegnoListener implements Listener {
     @SneakyThrows
     @EventHandler
@@ -20,8 +23,11 @@ public class AssegnoListener implements Listener {
         Action a = e.getAction();
         Material mat = e.getMaterial();
         ItemStack i = e.getPlayer().getItemInHand();
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Tasto destro per riscattare");
+
         if(a.equals(Action.RIGHT_CLICK_BLOCK) || a.equals(Action.RIGHT_CLICK_AIR)){
-            if(mat.equals(Material.PAPER) && i.getItemMeta().getDisplayName().endsWith("$")){
+            if(mat.equals(Material.PAPER) && i.getItemMeta().getLore().equals(lore) && i.getItemMeta().getDisplayName().endsWith("$")){
                 String name = e.getPlayer().getItemInHand().getItemMeta().getDisplayName();
                 String name_without_$ = name.replaceAll("[^\\d]", "");
                 int amount = Integer.parseInt(name_without_$);

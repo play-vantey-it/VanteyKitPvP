@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssegnoCommand implements CommandExecutor {
@@ -48,6 +49,9 @@ public class AssegnoCommand implements CommandExecutor {
                     ItemStack assegno = new ItemStack(Material.PAPER);
                     ItemMeta assegno_meta = assegno.getItemMeta();
                     assegno_meta.setDisplayName(amount + "$");
+                    List<String> lore = new ArrayList<>();
+                    lore.add("§7Tasto destro per riscattare");
+                    assegno_meta.setLore(lore);
                     assegno.setItemMeta(assegno_meta);
 
                     //Da l'assegno al giocatore
@@ -93,7 +97,10 @@ public class AssegnoCommand implements CommandExecutor {
             //Crea l'assegno
             ItemStack assegno = new ItemStack(Material.PAPER);
             ItemMeta assegno_meta = assegno.getItemMeta();
-            assegno_meta.setDisplayName(String.valueOf(amount) + "$");
+            assegno_meta.setDisplayName(amount + "$");
+            List<String> lore = new ArrayList<>();
+            lore.add("§7Tasto destro per riscattare");
+            assegno_meta.setLore(lore);
             assegno.setItemMeta(assegno_meta);
 
             //Da l'assegno al giocatore

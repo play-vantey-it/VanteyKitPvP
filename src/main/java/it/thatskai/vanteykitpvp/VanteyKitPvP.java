@@ -3,8 +3,7 @@ package it.thatskai.vanteykitpvp;
 import it.thatskai.vanteykitpvp.commands.*;
 import it.thatskai.vanteykitpvp.listeners.*;
 import it.thatskai.vanteykitpvp.manager.CoinFlipManager;
-import it.thatskai.vanteykitpvp.manager.DefaultScoreboardManager;
-import it.thatskai.vanteykitpvp.manager.KothManager;
+import it.thatskai.vanteykitpvp.placeholders.KothPlaceholders;
 import it.thatskai.vanteykitpvp.tasks.KeepDayTask;
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -44,6 +43,8 @@ public final class VanteyKitPvP extends JavaPlugin {
 
         BukkitTask daytask = new KeepDayTask().runTaskTimer(this, 0L, 0L);
 
+        new KothPlaceholders().register();
+
     }
 
     @Override
@@ -68,6 +69,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         pm.registerEvents(new CoinFlipListener(), this);
         pm.registerEvents(new KothListener(), this);
         pm.registerEvents(new JoinListener(), this);
+        pm.registerEvents(new BlockListener(), this);
     }
 
     public static void createCoinFlipConfig() {
