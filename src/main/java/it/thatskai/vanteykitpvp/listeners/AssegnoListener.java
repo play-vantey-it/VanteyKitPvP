@@ -27,6 +27,11 @@ public class AssegnoListener implements Listener {
         lore.add("§7Tasto destro per riscattare");
 
         if(a.equals(Action.RIGHT_CLICK_BLOCK) || a.equals(Action.RIGHT_CLICK_AIR)){
+
+            if(i.getItemMeta() == null) return;
+            if(i.getItemMeta().getLore() == null) return;
+            if(i.getItemMeta().getDisplayName() == null) return;
+
             if(mat.equals(Material.PAPER) && i.getItemMeta().getLore().equals(lore) && i.getItemMeta().getDisplayName().endsWith("$")){
                 String name = e.getPlayer().getItemInHand().getItemMeta().getDisplayName();
                 String name_without_$ = name.replaceAll("[^\\d]", "");
