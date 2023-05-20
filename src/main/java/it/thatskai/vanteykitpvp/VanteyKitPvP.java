@@ -54,7 +54,7 @@ public final class VanteyKitPvP extends JavaPlugin {
     }
 
     public void registerCommands(){
-        getCommand("assegno").setExecutor(new AssegnoCommand());
+        //getCommand("assegno").setExecutor(new AssegnoCommand());
         getCommand("coinflip").setExecutor(new CoinFlipCommand());
         getCommand("vkitpvp").setExecutor(new MainCommand());
         //getCommand("envoy").setExecutor(new EnvoyCommand());
@@ -65,7 +65,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new WeatherListener(), this);
-        pm.registerEvents(new AssegnoListener(), this);
+        //pm.registerEvents(new AssegnoListener(), this);
         pm.registerEvents(new CoinFlipListener(), this);
         pm.registerEvents(new KothListener(), this);
         pm.registerEvents(new JoinListener(), this);

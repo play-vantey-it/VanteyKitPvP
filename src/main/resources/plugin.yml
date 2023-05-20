@@ -11,6 +11,3 @@ commands:
     aliases:
       - kitpvpreforged
   koth:
-  assegno:
-    aliases:
-      - assegni

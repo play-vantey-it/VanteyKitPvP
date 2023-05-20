@@ -33,11 +33,11 @@ public class KothListener implements Listener {
         if(solidBlock == null);
         if(solidBlock.getType() == null);
 
-        if (blockBelow.getType() == Material.WOOL || solidBlock.getType() == Material.WOOL) {
+        if(blockBelow.getType() == Material.WOOL) {
             byte data = blockBelow.getData();
             byte data2 = solidBlock.getData();
 
-            if (data == 14 || data == 0 || data2 == 14 || data2 == 0) {
+            if (data == 14 || data == 0) {
                 if (currentPlayer == null) {
                     startTimer(player);
                 }else
@@ -47,7 +47,22 @@ public class KothListener implements Listener {
                     stopTimer();
                 }
             }
-        } else {
+        } else if(solidBlock.getType() == Material.WOOL){
+            byte data = solidBlock.getData();
+
+            if (data == 14 || data == 0) {
+                if (currentPlayer == null) {
+                    startTimer(player);
+                }else
+                if(currentPlayer == player) return;
+            }else {
+                if (currentPlayer != null && currentPlayer.equals(player)) {
+                    stopTimer();
+                }
+            }
+
+
+        }else{
             if (currentPlayer != null && currentPlayer.equals(player)) {
                 stopTimer();
             }
