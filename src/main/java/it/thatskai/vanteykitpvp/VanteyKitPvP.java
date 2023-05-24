@@ -24,6 +24,7 @@ public final class VanteyKitPvP extends JavaPlugin {
     public static FileConfiguration coinflip;
     public static FileConfiguration koth;
     public static FileConfiguration envoy;
+    public static FileConfiguration shop;
 
 
     @Override
@@ -59,6 +60,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         getCommand("vkitpvp").setExecutor(new MainCommand());
         //getCommand("envoy").setExecutor(new EnvoyCommand());
         getCommand("koth").setExecutor(new KothCommand());
+        getCommand("shop").setExecutor(new ShopCommand());
     }
 
     public void registerListener(){
@@ -70,6 +72,7 @@ public final class VanteyKitPvP extends JavaPlugin {
         pm.registerEvents(new KothListener(), this);
         pm.registerEvents(new JoinListener(), this);
         pm.registerEvents(new BlockListener(), this);
+        pm.registerEvents(new ShopListener(), this);
     }
 
     public static void createCoinFlipConfig() {
@@ -115,6 +118,20 @@ public final class VanteyKitPvP extends JavaPlugin {
             var1.printStackTrace();
         }
 
+        configFile = new File(instance.getDataFolder(), "shop.yml");
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+            instance.saveResource("shop.yml", false);
+        }
+
+        shop = new YamlConfiguration();
+
+        try {
+            shop.load(configFile);
+        } catch (InvalidConfigurationException | IOException var1) {
+            var1.printStackTrace();
+        }
+
 
     }
 
@@ -133,6 +150,12 @@ public final class VanteyKitPvP extends JavaPlugin {
 
         try {
             koth.save(configFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            shop.save(configFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

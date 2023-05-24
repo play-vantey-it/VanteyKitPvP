@@ -1,0 +1,131 @@
+main:
+  title: "&8Negozio"
+  size: 27
+  items:
+    DIAMOND_SWORD:
+      name: "&ePvP"
+      use: open pvp
+      slot: 11
+      lore:
+        - lore1
+        - lore2
+    POTION:
+      name: "&ePozioni"
+      use: open potion
+      slot: 13
+      lore:
+        - lore1
+        - lore2
+    ENCHANTED_BOOK:
+      name: "&eLibri"
+      use: open enchants
+      slot: 15
+      lore:
+        - lore1
+        - lore2
+
+pvp:
+  title: "&ePvP"
+  size: 27
+  items:
+    OBSIDIAN:
+      item: OBSIDIAN
+      name: "&fOssidiana"
+      slot: 11
+      type: give obsidian
+      data: 0
+      amount: 1
+      price: 8000
+      lore:
+        - lore1
+        - lore2
+    WEB:
+      item: WEB
+      name: "&fRagantele"
+      slot: 13
+      type: give cobweb
+      data: 0
+      amount: 1
+      price: 5000
+      lore:
+        - lore1
+        - lore2
+    EXP_BOTTLE:
+      item: EXP_BOTTLE
+      name: "&fBottiglie di esperienza"
+      slot: 15
+      type: give expbottle
+      data: 0
+      amount: 32
+      price: 1500
+      lore:
+        - lore1
+        - lore2
+    ENDER_PEARL:
+      item: ENDER_PEARL
+      name: "&fEnder pearl"
+      slot: 16
+      type: give enderpearl
+      data: 0
+      amount: 1
+      price: 20000
+      lore:
+        - lore1
+        - lore2
+
+potion:
+  title: "&ePotion"
+  size: 27
+  items:
+    POTION1:
+      item: POTION
+      name: "&fVeleno"
+      slot: 11
+      type: give potion
+      data: 16388
+      amount: 1
+      price: 25000
+      lore:
+        - lore1
+        - lore2
+    POTION2:
+      item: POTION
+      name: "&fDebolezza"
+      slot: 13
+      type: give potion
+      data: 16424
+      amount: 1
+      price: 5000
+      lore:
+        - lore1
+        - lore2
+    POTION3:
+      item: POTION
+      name: "&fLentezza"
+      slot: 15
+      type: give potion
+      data: 16426
+      amount: 1
+      price: 20000
+      lore:
+        - lore1
+        - lore2
+
+enchants:
+  title: "&eLibri"
+  size: 27
+  items:
+    BOOK1:
+      item: ENCHANTED_BOOK
+      name: "&fAspetto di fuoco"
+      slot: 11
+      type: give book
+      enchant:
+        type: FIRE_ASPECT
+        level: 1
+      data: 0
+      amount: 1
+      price: 9500
+      lore:
+        - lore1
+        - lore2
